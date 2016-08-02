@@ -48,7 +48,7 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % from measurements of the triple oxygen isotopic composition of dissolved
 % O2, as done in Manning et al. (2016) Impact of recently upwelled water on
 % productivity quantified by in situ and incubation-based methods in
-% Monterey Bay, submitted manuscript.
+% Monterey Bay, manuscript in preparation.
 %
 % Uses equation 7 from Prokopenko et al. (2011) Geophys. Res. Lett.
 % 
