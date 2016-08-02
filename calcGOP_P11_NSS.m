@@ -50,7 +50,7 @@ function GOP_NSS = calcGOP_P11_NSS(d17O,d18O,SP,pt,kO2,h,O2,dD17dt,varargin)
 % layer from measurements of the triple oxygen isotopic composition of
 % dissolved O2, as done in Manning et al. (2016) Impact of recently
 % upwelled water on productivity quantified by in situ and incubation-based
-% methods in Monterey Bay, submitted manuscript.
+% methods in Monterey Bay, manuscript in preparation.
 %
 % Uses equation S8 from Prokopenko et al. (2011) Geophys. Res. Lett. Note
 % that as of August 1, 2016, equation 6 in the main manuscript has typos
