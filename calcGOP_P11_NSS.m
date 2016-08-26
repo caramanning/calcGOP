@@ -153,18 +153,18 @@ function GOP_NSS = calcGOP_P11_NSS(d17O,d18O,SP,pt,kO2,h,O2,dD17dt,varargin)
 % the dissolved gas in water relative to the abundance in air (BK80 eqn
 % 29). BK84 conclude that "the effect of salinity on the oxygen
 % fractionation should be undetectable in the range 0 < S < 40" and
-% therefore recommend using the freshwater equation from BK80. (See
-% Isotopic fractionation of atmospheric oxygen during solution, page 631 of
-% BK84.)
+% therefore recommend using the freshwater equation from BK80. (See section
+% "Isotopic fractionation of atmospheric oxygen during solution," on page
+% 631 of BK84.)
 %
-% a17eq is from Stanley et al. (2010), Appendix A who finds that 17Delta =
+% a17eq is from Stanley et al. (2010), Appendix A who finds that D17 =
 % 7.7(3.0) per meg for water at room temperature equilibrated with air,
 % using lambda = 0.518. This result is similar to Reuer et al. (2007) who
 % found 17Delta = 8 per meg at 11 degC and 25 degC using lambda = 0.516,
-% which is approximately equal to 17Delta = 6.5 per meg with lambda =
+% which is approximately equal to D17 = 6.5 per meg with lambda =
 % 0.518. Using the definition of a18eq from BK84 and noting that
-%      (delta17Oeq + 1) = a17eq 
-% we can solve the equation for 17D to yield 
+%      (d17Oeq/1000 + 1) = a17eq 
+% we can solve the equation for D17 to yield 
 %      a17eq = exp(8E-6+0.518*log(a18eq))
 %
 % -------------------------------------------------------------------------
@@ -299,7 +299,6 @@ a17eq   = exp(7.7E-6+lambdaS10*log(a18eq));
 % Calculate GOP using equation 7 in Prokopenko et al. (2011) Geophys. Res.
 % Lett. (steady state)
 % -------------------------------------------------------------------------
-
 
 % GOP_NSS = (N1 + N2)/(D1 + D2)
 

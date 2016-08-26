@@ -147,18 +147,18 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % the dissolved gas in water relative to the abundance in air (BK80 eqn
 % 29). BK84 conclude that "the effect of salinity on the oxygen
 % fractionation should be undetectable in the range 0 < S < 40" and
-% therefore recommend using the freshwater equation from BK80. (See
-% Isotopic fractionation of atmospheric oxygen during solution, page 631 of
-% BK84.)
+% therefore recommend using the freshwater equation from BK80. (See section
+% "Isotopic fractionation of atmospheric oxygen during solution," on page
+% 631 of BK84.)
 %
-% a17eq is from Stanley et al. (2010), Appendix A who finds that 17Delta =
+% a17eq is from Stanley et al. (2010), Appendix A who finds that D17 =
 % 7.7(3.0) per meg for water at room temperature equilibrated with air,
 % using lambda = 0.518. This result is similar to Reuer et al. (2007) who
 % found 17Delta = 8 per meg at 11 degC and 25 degC using lambda = 0.516,
-% which is approximately equal to 17Delta = 6.5 per meg with lambda =
+% which is approximately equal to D17 = 6.5 per meg with lambda =
 % 0.518. Using the definition of a18eq from BK84 and noting that
-%      (delta17Oeq + 1) = a17eq 
-% we can solve the equation for 17D to yield 
+%      (d17Oeq/1000 + 1) = a17eq 
+% we can solve the equation for D17 to yield 
 %      a17eq = exp(8E-6+0.518*log(a18eq))
 %
 % -------------------------------------------------------------------------
@@ -271,7 +271,6 @@ R17_VSMOW = 0.0003799;
 % Ratio of 18O/16O and 17O/16O of atmospheric O2
 R18_air = R18_VSMOW./(d18OVSMOW/1000+1);
 R17_air = R17_VSMOW./(d17OVSMOW/1000+1);
-
 
 % Isotopic composition of photosynthetic O2 when the substrate is water
 % with the isotopic composition of VSMOW
