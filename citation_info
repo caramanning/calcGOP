@@ -1,5 +1,3 @@
 Please cite these functions as:
-CC Manning (2016) calcGOP: Functions for calculating gross oxygen production from measurements of the triple oxygen isotopic
-composition of dissolved O2. Zenodo. doi: 10.5281/zenodo.59268
-
-The DOI has been reserved but is not active yet (as of August 2, 2016).
+CC Manning and EM Howard (2016) calcGOP: Functions for calculating gross oxygen production from measurements of the triple oxygen isotopic
+composition of dissolved O2. http://github.com/caramanning/calcGOP

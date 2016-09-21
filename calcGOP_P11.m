@@ -1,27 +1,28 @@
-function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
+function GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2,varargin)
 % calcGOP_P11: steady state gross oxygen production using Prokopenko 2011
 % steady state equation 7
 % -------------------------------------------------------------------------
 % USAGE:
 % -------------------------------------------------------------------------
-% GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2)
+% GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2)
 % GOP = calcGOP_P11(-0.571224,-1.27791,35,15,1.4)
 %   > GOP = 0.1914
 % or
-% GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,d17Ow,d18Ow)
+% GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2,d17O_H2O,d18O_H2O)
 % GOP = calcGOP_P11(-0.571224,-1.27791,35,15,1.4,-12.1885,-23.8867) 
 %   > GOP = 0.2095
+%
 % -------------------------------------------------------------------------
 % INPUTS:
 % -------------------------------------------------------------------------
-% d17O      = delta17O of O2 in sample (per mil vs atmospheric O2)
-% d18O      = delta18O of O2 in sample (per mil vs atmospheric O2)
+% d17O_O2      = delta17O of O2 in sample (per mil vs atmospheric O2)
+% d18O_O2      = delta18O of O2 in sample (per mil vs atmospheric O2)
 % SP        = practical salinity of sample (PSS)
 % pt        = potential temperature of sample (degrees C)
 % kO2       = gas transfer coefficient for O2 (m d^-1) 
 % varargin  = optional arguments
-%         d17Ow = delta17O of water (per mil vs atmospheric O2)
-%         d18Ow = delta18O of water (per mil vs atmospheric O2)
+%         d17O_H2O = delta17O of water (per mil vs atmospheric O2)
+%         d18O_H2O = delta18O of water (per mil vs atmospheric O2)
 %
 % -------------------------------------------------------------------------
 % OUTPUTS:
@@ -48,7 +49,7 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % from measurements of the triple oxygen isotopic composition of dissolved
 % O2, as done in Manning et al. (2016) Impact of recently upwelled water on
 % productivity quantified by in situ and incubation-based methods in
-% Monterey Bay, manuscript in preparation.
+% Monterey Bay, submitted manuscript.
 %
 % Uses equation 7 from Prokopenko et al. (2011) Geophys. Res. Lett.
 % 
@@ -75,7 +76,7 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 %            that can exchange isotopes (e.g., reactant and product)
 % lambda   = (a17 - 1)/(a18 - 1) = ratio of fractionation factors
 % d18O     = (R18samp/R18std - 1) * 1000 
-% D17      = (log(d17O/1000+1) - lambda*log(d18O/1000+1))*10^6 where log is
+% D17      = (log(d17O_O2/1000+1) - lambda*log(d18O/1000+1))*10^6 where log is
 %           the natural logarithm
 %
 % 
@@ -124,14 +125,14 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % 4) Photosynthetic fractionation factors are calculated from Luz and
 % Barkan (2011) Geophys. Res. Lett., Table 1, bottom row. They estimate
 % that the isotopic composition of O2 produced by photosynthesis from VSMOW
-% is d18Op = -20.014 per mil and d17Op = -10.126 per mil with respect to
-% amospheric O2. These delta values are for "average phytoplankton", and
-% are the average of four different isotopic compositions of O2, measured
-% independently for cyanobacteria, green algae, diatoms, and
-% coccolithophores. 
+% is d18O_O2_p = -20.014 per mil and d17O_O2_p = -10.126 per mil with
+% respect to amospheric O2. These delta values are for "average
+% phytoplankton", and are the average of four different isotopic
+% compositions of O2, measured independently for cyanobacteria, green
+% algae, diatoms, and coccolithophores.
 %   We calculate a18p, the photosynthetic fractionation factor, as
-%       a18p = r(18O/16O)p / r(18O/16O)VSMOW 
-%            = (d18Op+1)*r(18O/16O)air / r(18O/16O)VSMOW.
+%       a18p = r(18O/16O)p / r(18O/16O)VSMOW
+%            = (d18O_O2_p+1)*r(18O/16O)air / r(18O/16O)VSMOW.
 %
 % 5) Equilibrium isotopic fractionation during air-sea gas exchange is
 % calculated as
@@ -147,18 +148,18 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % the dissolved gas in water relative to the abundance in air (BK80 eqn
 % 29). BK84 conclude that "the effect of salinity on the oxygen
 % fractionation should be undetectable in the range 0 < S < 40" and
-% therefore recommend using the freshwater equation from BK80. (See section
-% "Isotopic fractionation of atmospheric oxygen during solution," on page
-% 631 of BK84.)
+% therefore recommend using the freshwater equation from BK80. (See
+% Isotopic fractionation of atmospheric oxygen during solution, page 631 of
+% BK84.)
 %
-% a17eq is from Stanley et al. (2010), Appendix A who finds that D17 =
+% a17eq is from Stanley et al. (2010), Appendix A who finds that 17Delta =
 % 7.7(3.0) per meg for water at room temperature equilibrated with air,
 % using lambda = 0.518. This result is similar to Reuer et al. (2007) who
 % found 17Delta = 8 per meg at 11 degC and 25 degC using lambda = 0.516,
-% which is approximately equal to D17 = 6.5 per meg with lambda =
+% which is approximately equal to 17Delta = 6.5 per meg with lambda =
 % 0.518. Using the definition of a18eq from BK84 and noting that
-%      (d17Oeq/1000 + 1) = a17eq 
-% we can solve the equation for D17 to yield 
+%      (delta17Oeq + 1) = a17eq 
+% we can solve the equation for 17D to yield 
 %      a17eq = exp(8E-6+0.518*log(a18eq))
 %
 % -------------------------------------------------------------------------
@@ -213,15 +214,14 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 % -------------------------------------------------------------------------
 % SOFTWARE AUTHORSHIP, ATTRIBUTION, and URL:
 % -------------------------------------------------------------------------
-% Written by Cara C. Manning (cmanning@whoi.edu), Woods Hole Oceanographic
-% Institution and Massachusetts Institute of Technology
+% Written by Cara C. Manning (cmanning@whoi.edu) and Evan M. Howard 
+% Woods Hole Oceanographic Institution and Massachusetts Institute of
+% Technology
 %
-% Cite as: CC Manning (2016) calcGOP: Functions for calculating gross
-% oxygen production from measurements of the triple oxygen isotopic
-% composition of dissolved O2. Zenodo. doi: 10.5281/zenodo.59268
-%
-% Find the latest version of the functions at 
-% https://github.com/caramanning/calcGOP/
+% Cite as: CC Manning and EM Howard (2016) calcGOP: Functions for
+% calculating gross oxygen production from measurements of the triple
+% oxygen isotopic composition of dissolved O2. 
+% http://github.com/caramanning/calcGOP/
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License, which 
@@ -235,27 +235,27 @@ function GOP = calcGOP_P11(d17O,d18O,SP,pt,kO2,varargin)
 
 % delta18O and delta17O of VSMOW in per mil vs air O2
 % --- See description note 1 in header
-d18OVSMOW   = -23.324; 
-d17OVSMOW   = -11.883;
+d18O_VSMOW_air = -23.324; 
+d17O_VSMOW_air = -11.883;
 
-% Check whether the isotopic compositon of water (d17Ow and d18Ow) was
-% provided as an input. If not provided, set d17Ow and d18Ow to the
+% Check whether the isotopic compositon of water (d17O_H2O and d18O_H2O) was
+% provided as an input. If not provided, set d17O_H2O and d18O_H2O to the
 % isotopic composition of VSMOW
 if nargin > 5
-    d17Ow = varargin{1};
-    d18Ow = varargin{2};
+    d17O_H2O = varargin{1};
+    d18O_H2O = varargin{2};
 else
     % set to VSMOW
-    d17Ow   = d17OVSMOW; 
-    d18Ow   = d18OVSMOW; 
+    d17O_H2O = d17O_VSMOW_air; 
+    d18O_H2O = d18O_VSMOW_air; 
 end
 
 % convert deltas to X, the isotope ratio divided by the ratio of
 % atmospheric O2
-X17     = d17O/1000+1;
-X18     = d18O/1000+1;
-X17w    = d17Ow/1000+1;
-X18w    = d18Ow/1000+1;
+X17     = d17O_O2/1000+1; 
+X18     = d18O_O2/1000+1; 
+X17w    = d17O_H2O/1000+1;
+X18w    = d18O_H2O/1000+1;
 X17air  = 1;
 X18air  = 1;
 
@@ -269,18 +269,19 @@ R18_VSMOW = 0.0020052;
 R17_VSMOW = 0.0003799;
 
 % Ratio of 18O/16O and 17O/16O of atmospheric O2
-R18_air = R18_VSMOW./(d18OVSMOW/1000+1);
-R17_air = R17_VSMOW./(d17OVSMOW/1000+1);
+R18_air = R18_VSMOW./(d18O_VSMOW_air/1000+1);
+R17_air = R17_VSMOW./(d17O_VSMOW_air/1000+1);
+
 
 % Isotopic composition of photosynthetic O2 when the substrate is water
 % with the isotopic composition of VSMOW
 % --- See description note 4 in header
-d18Op = -20.014;
-d17Op = -10.126;
+d18O_O2_p = -20.014;
+d17O_O2_p = -10.126;
 
 % Photosynthetic fractionation factors 
-a18p    = (d18Op/1000+1).*R18_air./R18_VSMOW;
-a17p    = (d17Op/1000+1).*R17_air./R17_VSMOW;
+a18p    = (d18O_O2_p/1000+1).*R18_air./R18_VSMOW;
+a17p    = (d17O_O2_p/1000+1).*R17_air./R17_VSMOW;
 
 % Equilibrium isotopic fractionation during air-sea gas exchange
 % as a function of temperature in Kelvin

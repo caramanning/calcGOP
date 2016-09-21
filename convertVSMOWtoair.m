@@ -58,15 +58,14 @@ function [d17O_air,d18O_air] = convertVSMOWtoair(d17O_VSMOW,d18O_VSMOW)
 % -------------------------------------------------------------------------
 % SOFTWARE AUTHORSHIP, ATTRIBUTION, and URL:
 % -------------------------------------------------------------------------
-% Written by Cara C. Manning (cmanning@whoi.edu), Woods Hole Oceanographic
-% Institution and Massachusetts Institute of Technology
+% Written by Cara C. Manning (cmanning@whoi.edu) and Evan M. Howard 
+% Woods Hole Oceanographic Institution and Massachusetts Institute of
+% Technology
 %
-% Cite as: CC Manning (2016) calcGOP: Functions for calculating gross
-% oxygen production from measurements of the triple oxygen isotopic
-% composition of dissolved O2. Zenodo. doi: 10.5281/zenodo.59268
-%
-% Find the latest version of the functions at 
-% https://github.com/caramanning/calcGOP/
+% Cite as: CC Manning and EM Howard (2016) calcGOP: Functions for
+% calculating gross oxygen production from measurements of the triple
+% oxygen isotopic composition of dissolved O2. 
+% http://github.com/caramanning/calcGOP/
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License, which 
