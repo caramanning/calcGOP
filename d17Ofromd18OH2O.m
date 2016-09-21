@@ -38,8 +38,11 @@ function [d17O_H2O] = d17Ofromd18OH2O(d18O_H2O,excess17O)
 %           Note that excess17O is typically called the 17O-excess in the
 %           literature.
 %
-% lambda_w  = the slope on a plot of log(d17O/1000+1) vs log(d18O/1000+1) 
-%           for meteoric water or for seawater.
+% lambda_w  = the slope on a plot of log(d17O_H2O/1000+1) vs log(d18O_H2O/1000+1) 
+%           for meteoric water or for seawater. The slope results from
+%           water isotopic fractionation from multiple environmental
+%           processes and is close to the value of lambda_w for equilibrium
+%           isotopic fractionation of water (0.529 +/- 0.001).
 %
 % NOTES:
 % 1) Meijer and Li (1998), Barkan and Luz (2005), and Luz and Barkan (2010)

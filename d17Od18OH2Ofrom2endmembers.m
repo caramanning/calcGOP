@@ -50,7 +50,7 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % Estimates d17O and d18O for water samples as a function of salinity based
 % on a linear combination of two endmembers with known d18O and salinity.
 %
-% d18Os     = (R18_s/R18_VSMOW - 1) * 1000 
+% d18O_H2O  = (R18_s/R18_VSMOW - 1) * 1000 
 %           where R18_s is the 18O/16O ratio of the sample and R18_VSMOW
 %           is the 18O/16O ratio of VSMOW.
 %
@@ -62,7 +62,8 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % lambda_w  = the slope on a plot of log(d17O_H2O/1000+1) vs log(d18O_H2O/1000+1) 
 %           for meteoric water or for seawater. The slope results from
 %           water isotopic fractionation from multiple environmental
-%           processes and is close to the value of lambda for
+%           processes and is close to the value of lambda_w for equilibrium
+%           isotopic fractionation of water (0.529 +/- 0.001).
 %
 % NOTES:
 % 1) Meijer and Li (1998), Barkan and Luz (2005), and Luz and Barkan (2010)
