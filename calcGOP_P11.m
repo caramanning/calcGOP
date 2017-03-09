@@ -33,10 +33,10 @@ function GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2,varargin)
 % OTHER REQUIRED FUNCTIONS:
 % ------------------------------------------------------------------------- 
 % Use of this function requires installation of the gas_toolbox as well as
-% the GSW Toolbox
+% the GSW Toolbox.
 %
-% CC Manning and DP Nicholson (2016). gas_toolbox: Updated GTWS-7 Release.
-% Zenodo. doi: 10.5281/zenodo.46569
+% CC Manning and DP Nicholson (2017). gas_toolbox.
+% https://github.com/dnicholson/gas_toolbox
 %
 % T McDougall and P Barker (2011) Getting started with TEOS-10 and the
 % Gibbs Seawater (GSW) Oceanographic Toolbox. SCOR/IAPSO WG127. Available
@@ -45,13 +45,19 @@ function GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2,varargin)
 % -------------------------------------------------------------------------
 % DESCRIPTION:
 % -------------------------------------------------------------------------
-% Calculates steady state gross oxygen production (GOP) in the mixed layer
-% from measurements of the triple oxygen isotopic composition of dissolved
-% O2, as done in Manning et al. (2016) Impact of recently upwelled water on
-% productivity quantified by in situ and incubation-based methods in
-% Monterey Bay, submitted manuscript.
+% Calculates non-steady state gross oxygen production (GOP) in the mixed
+% layer from measurements of the triple oxygen isotopic composition of
+% dissolved O2, as done in: Manning et al. (2017) Impact of recently
+% upwelled water on productivity quantified by in situ and incubation-based
+% methods in Monterey Bay, J. Geophys. Res. Oceans doi:
+% 10.1002/2016JC012306 
+% and 
+% Manning et al. (2017) Revising estimates of aquatic gross oxygen
+% production by the triple oxygen isotope method to incorporate the local
+% isotopic composition of water (submitted manuscript)
 %
-% Uses equation 7 from Prokopenko et al. (2011) Geophys. Res. Lett.
+% This function uses equation 7 from Prokopenko et al. (2011) Geophys. Res.
+% Lett.
 % 
 % This function includes equilibrium but NOT kinetic isotopic fractionation
 % from air-sea gas exchange, nor fractionation associated with
@@ -218,7 +224,7 @@ function GOP = calcGOP_P11(d17O_O2,d18O_O2,SP,pt,kO2,varargin)
 % Woods Hole Oceanographic Institution and Massachusetts Institute of
 % Technology
 %
-% Cite as: CC Manning and EM Howard (2016) calcGOP: Functions for
+% Cite as: CC Manning and EM Howard (2017) calcGOP: Functions for
 % calculating gross oxygen production from measurements of the triple
 % oxygen isotopic composition of dissolved O2. 
 % http://github.com/caramanning/calcGOP/

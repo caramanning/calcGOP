@@ -9,11 +9,11 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % -------------------------------------------------------------------------
 % [d17O_H2O,d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2O_b,SPa,SPb)
 % [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(10,-1.7,-9.3,30.7,0)
-%   > d17O_H2O = -3.5902
+%   > d17O_H2O = -3.5942
 %   > d18O_H2O = -6.8244
 %
-% [d17Oc,d18Oc] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2O_b,SPa,SPb,excess17a,excess17b)
-% [d17Oc,d18Oc] = d17Od18OH2Ofrom2endmembers(10,-1.7,-9.3,30.7,0,-10,20)
+% [d17O_H2O,d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2O_b,SPa,SPb,excess17a,excess17b)
+% [d17O_H2O,d18O_H2O] = d17Od18OH2Ofrom2endmembers(10,-1.7,-9.3,30.7,0,-10,20)
 %   > d17O_H2O = -3.6006
 %   > d18O_H2O = -6.8244
 % 
@@ -21,13 +21,13 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % INPUTS:
 % -------------------------------------------------------------------------
 % SP          = practical salinity of sample with unknown d18O and d17O (PSS)
-% d18O_H2O_a  = delta18O of H2O in endmember A (per mil vs VSMOW)
-% d18O_H2O_b  = delta18O of H2O in endmember B (per mil vs VSMOW)
+% d18O_H2O_a  = delta18O of H2O in endmember A (per mil vs VSMOW-SLAP)
+% d18O_H2O_b  = delta18O of H2O in endmember B (per mil vs VSMOW-SLAP)
 % SPa         = practical salinity of endmember A (PSS)
 % SPb         = practical salinity of endmember B (PSS)
 % varargin    = optional arguments
-%         excess17Oa = 17O-excess of H2O in endmember A (per meg vs VSMOW)
-%         excess17Ob = 17O-excess of H2O in endmember B (per meg vs VSMOW)
+%         excess17Oa = 17O-excess of H2O in endmember A (per meg vs VSMOW-SLAP)
+%         excess17Ob = 17O-excess of H2O in endmember B (per meg vs VSMOW-SLAP)
 %
 % SP can be size 1x1, 1xn or nx1.
 % d18O_H2O_a, d18O_H2O_b SPa, SPb, excess17Oa, and excess17Ob must all be
@@ -36,8 +36,8 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % -------------------------------------------------------------------------
 % OUTPUTS:
 % -------------------------------------------------------------------------
-% d17O_H2O   = delta17O of H2O for sample with salinity SP (per mil vs VSMOW)
-% d18O_H2O   = delta18O of H2O for sample with salinity SP (per mil vs VSMOW)
+% d17O_H2O   = delta17O of H2O for sample with salinity SP (per mil vs VSMOW-SLAP)
+% d18O_H2O   = delta18O of H2O for sample with salinity SP (per mil vs VSMOW-SLAP)
 %
 % Note: After calculating d17O-H2O and d18O-H2O with respect to VSMOW using
 % this function, you can use convertVSMOWtoair to calculate d17O-H2O and
@@ -69,23 +69,23 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % 1) Meijer and Li (1998), Barkan and Luz (2005), and Luz and Barkan (2010)
 % find lambda_w = 0.528 for fresh and saltwater.
 % 
-% 2) Luz and Barkan (2010) plot
-%       log(d17O_H2O/1000+1) = lambda_w*log(d18O_H2O/1000+1) + excess17O/10^6
-% separately for globally-distributed meteoric water and seawater samples.
-% The y-intercept on these plots is the average 17O-excess. They find 
-%       excess17O = 33 per meg vs VSMOW for meteoric water 
-%       excess17O = -5 per meg vs VSMOW for seawater
+% 2) In this function, the 17O-excess for both endmembers can be provided
+% as an optional input. If not provided, the 17O-excess is set to 27 per
+% meg for SP < 15 and -5 per meg for SP >= 15 (i.e., the average meteoric
+% and seawater values described below).
+
+% The seawater value of -5 per meg is the average value of all
+% near-surface (<5 m depth) seawater samples published in Luz and Barkan
+% (2010), Table 1. The freshwater value of 27 per meg is the average of all
+% meteoric and tap water measurements compiled in Li et al. (2015), Tables
+% 3 and S2. Note that the standard deviations are 4 per meg for the
+% seawater average value and 20 per meg for the freshwater average value,
+% i.e. there is much more regional variability in the freshwater
+% 17O-excess than the seawater 17O-excess.
 %
-% In this function, the 17O-excess for both endmembers can be provided as
-% an optional input. If not provided, it is set to 33 per meg for SP < 15
-% and -5 per meg for SP >= 15 (i.e., the meteoric and seawater values from
-% Luz and Barkan (2010), above).
-%
-% Note that Li et al. (2015) find for the continental USA the average
-% 17O-excess of tap water (similar to meteoric) is 17(11) per meg, rather
-% than 33 per meg. Future studies will help to refine our understanding of
-% variability in 17O-excess and therefore the default 17O values in this
-% function may be revised in the future.
+% Future studies will help to refine our understanding of variability in
+% 17O-excess and therefore the default 17O values in this function may be
+% revised in the future.
 %
 % The results are much more sensitive to the choices of d18O-H2O and
 % salinity for the endmembers than to the 17O-excess of the endmembers,
@@ -174,7 +174,7 @@ function [d17O_H2O, d18O_H2O] = d17Od18OH2Ofrom2endmembers(SP,d18O_H2O_a,d18O_H2
 % Woods Hole Oceanographic Institution and Massachusetts Institute of
 % Technology
 %
-% Cite as: CC Manning and EM Howard (2016) calcGOP: Functions for
+% Cite as: CC Manning and EM Howard (2017) calcGOP: Functions for
 % calculating gross oxygen production from measurements of the triple
 % oxygen isotopic composition of dissolved O2. 
 % http://github.com/caramanning/calcGOP/
@@ -198,12 +198,12 @@ if nargin > 5
     excess17Ob = varargin{2};
 else
     if SPa < 15
-        excess17Oa = 33; % meteroric water value
+        excess17Oa = 27; % meteroric water value
     else
         excess17Oa = -5; % seawater value
     end;
     if SPb < 15
-        excess17Ob = 33; % meteoric water value
+        excess17Ob = 27; % meteoric water value
     else
         excess17Ob = -5; % seawater value
     end;
